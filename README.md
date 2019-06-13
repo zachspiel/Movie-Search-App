@@ -1,3 +1,6 @@
-# Movie-Search-App
+## Movie-Search-App
 
-This app was created with Flask in Python.
+Displays current movies showing at Harkins.
+
+Made using Python, Flask & BeautifulSoup
+
