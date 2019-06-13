@@ -1,2 +1,3 @@
 # Movie-Search-App
-Search for nearby movies and theatres
+
+This app was created with Flask in Python.
