@@ -14,16 +14,19 @@
 			<h1>Harkins Web Scraper</h1>
 		</div>
 		<div class="row justify-content-center align-items-center">
-			<form>
-				<label for="search">Search For a movie</label>
-				<input type="text/css" name="search">
+			<form method="post">
+				<label for="movie">Search</label>
+				<input type="text" name="movie" id="movie">
+				<input type="submit" value="search"></form>
 			</form>
 		</div>
+		<div class="row"><h1>Showing results for: {{ search }}</h1></div>
+		
 		<div class="row">
-			{% for item in d %}
+			{% for item in searched_movies %}
 			<div class="col col-lg-2 col-sm-4 border">
 				<p>{{ item }}</p>
-				<img src=" {{ d[item]}} " style="width:100px;height:150px;"></td>
+				<img src=" {{ searched_movies[item] }} " style="width:100px;height:150px;"></td>
 			</div>
 			{% endfor %}
 		</div>
