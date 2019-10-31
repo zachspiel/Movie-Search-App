@@ -1,0 +1,96 @@
+
+body {
+  font-family: 'Roboto Slab', serif;
+}
+
+#title{
+	font-size:3rem;
+	
+	font-weight:bold;
+}
+
+#title,#search-text{
+	margin-top: 80px;
+}
+
+#movie-results{
+	margin-top:80px;
+	padding:0 50px 50px 50px;
+}
+#movie-box{
+	padding-bottom: 20px;
+	border: 1px solid #000;
+}
+@media (min-width: 992px) {
+  #movie-title:nth-child(3n+1) {
+    clear: left;
+  }
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  #movie-title:nth-child(2n+1) {
+    clear: left;
+  }
+}
+
+input[type='text'],input[type='number'],textarea {font-size:16px;}
+
+.submitButton {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding:5px;
+    border-radius: 25px;
+    background: #fcba03;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+}
+
+.clearButton {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding:5px;
+    border-radius: 25px;
+    background: #fc1803;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;   
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
