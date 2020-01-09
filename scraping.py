@@ -1,15 +1,21 @@
 from bs4 import BeautifulSoup
 import requests
 
-# GET MOVIE POSTER PAGE FOR SCRAPING
-base_url = 'https://www.harkins.com/movies/now-showing'
-r = requests.get(base_url)
-soup = BeautifulSoup(r.text, "html.parser")
-
-all_movies = soup.find_all('li', class_="posters-container") # find all movies now playing
-
 # ****** FUNCTION TO GET MOVIE POSTER IMAGES ***** #
-def getInfo(movieName):
+def getInfo(movieName,theatre):
+
+	now_showing_url = 'https://www.harkins.com/movies/now-showing'
+	now_showing_amc = 'https://www.amctheatres.com/movies'
+
+	r = requests.get(now_showing_url)
+	amcR = requests.get(now_showing_amc)
+
+	soup = BeautifulSoup(r.text, "html.parser")
+	amcSoup = BeautifulSoup(amcR.text, "html.parser")
+
+	all_movies = soup.find_all('li', class_="posters-container") # find all movies now playing
+	amc_movies = amcSoup.find_all('div', class_="Slide")
+
 	movies = {}
 
 	for item in all_movies:
@@ -20,15 +26,31 @@ def getInfo(movieName):
 		movie_name = movie_name.text.replace('\n', "").strip()
 
 		movie_link = item.find("a").get('href')
-		movie_link = "harkins.com/" + movie_link
+		movie_link = "http://harkins.com" + movie_link
 
 		if movieName not in movie_name:
 			continue
 		else:
-			movies[movie_name] = [movie_poster,movie_link]
+			if 'harkins' in theatre:
+				movies[movie_name] = [movie_poster,movie_link, "Harkins"]
 			#movieLink = movie_name + "_link"
-			#print(movieLink)
 			#movies[movie_name + "_link"] = movie_link
+
+	for movie in amc_movies:
+		poster = movie.find("img", {"class":None})
+		poster = poster['src']
+
+		name = movie.find("h3", {"class":None})
+		name = name.text.replace('\n', "").strip()
+
+		link = movie.find("a").get("href")
+		link = "http://amctheatres.com" + link
+		
+		if movieName not in name:
+			continue
+		else:
+			if 'amc' in theatre:
+				movies[name] = [poster,link,"AMC Theatres"]
 
 	return movies
 
