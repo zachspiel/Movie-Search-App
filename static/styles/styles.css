@@ -5,7 +5,7 @@ body {
 
 #title{
 	font-size:3rem;
-	
+
 	font-weight:bold;
 }
 
@@ -53,7 +53,7 @@ input[type='text'],input[type='number'],textarea {font-size:16px;}
     background: #fc1803;
     display: inline-block;
     border: none;
-    transition: all 0.4s ease 0s;   
+    transition: all 0.4s ease 0s;
 }
 
 @keyframes fadeInUp {

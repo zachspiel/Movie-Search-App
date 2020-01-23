@@ -27,18 +27,18 @@ def search():
 
 		theatre = request.form.getlist('check')
 		print(theatre)
-		
+
 		if(len(theatre) == 0):
-			return render_template('search.html',clearButton="none")
+			return render_template('search.html',clearButton="none",alert = True)
 
 		info = getInfo(movie_name,theatre)
-		
+
 		return render_template(
 			'search.html',
 			movies = info,
 			clearButton = 'visible',
 			className = 'py-5 bg-light',
-			
+
 		)
 
 	return render_template('search.html',clearButton="none")

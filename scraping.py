@@ -45,7 +45,7 @@ def getInfo(movieName,theatre):
 
 		link = movie.find("a").get("href")
 		link = "http://amctheatres.com" + link
-		
+
 		if movieName not in name:
 			continue
 		else:
@@ -56,5 +56,3 @@ def getInfo(movieName,theatre):
 
 if __name__ == "__main__":
 	print(scrape())
-
-
