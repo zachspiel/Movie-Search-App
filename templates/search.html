@@ -49,10 +49,9 @@
          <!-- Search bar row-->
          <div class="justify-content-center align-items-center">
             <form method="post" name="searchForm">
-               <input type="text" name="movie" id="movie" onkeyup="success()">
-               <!--<input type="submit" value="search" id="submit" class="submitButton">--><br>
-               <input type="checkbox" name="check" value="harkins"> Harkins <br>
-               <input type="checkbox" name="check" value="amc"> AMC Theatres <br>
+               <input type="text" name="movie" id="movie" placeholder="leave blank to search for all movies" size="35"><br>
+               <input type="checkbox" name="check" value="harkins" required> Harkins <br>
+               <input type="checkbox" name="check" value="amc" required> AMC Theatres <br>
                <input type="submit" value="search" id="movieSearch" class="submitButton" style="margin-top: 10px; margin-bottom: 10px">
 
             </form>
