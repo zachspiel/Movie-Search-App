@@ -4,9 +4,21 @@ body {
 }
 
 #title{
-	font-size:3rem;
+	font-size:20px;
 
 	font-weight:bold;
+}
+
+@media only screen and (max-width: 768px) {
+  #title {
+    font-size: 2px !important;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #title {
+    font-size: 15px !important;
+  }
 }
 
 #title,#search-text{
