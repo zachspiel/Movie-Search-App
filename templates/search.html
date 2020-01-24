@@ -6,8 +6,8 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
       <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
       <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
-
-
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    </head>
    <body>
     <header>
@@ -21,7 +21,8 @@
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white">Contact</h4>
               <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Email me</a></li>
+                <li><a href="#" class="text-white">Email me at: zachspielberger@gmail.com</a></li>
+                <li><a href="#" class="text-white">View <a href="https://github.com/zachspiel" target="_blank">Github</a></li>
               </ul>
             </div>
           </div>
@@ -31,7 +32,7 @@
         <div class="container d-flex justify-content-between">
           <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>MoviePhone</strong>
+            <strong class="logo">MoviePhone</strong>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,14 +43,16 @@
       <div class="container-fluid" >
       <div class="row justify-content-center align-items-center">
       	<div class="row-sm-12">
-         <h1 id="title">Search for a movie below</h1>
+         <h3 id="title">Search for a movie below</h3>
         </div>
       </div>
-      <div class="row justify-content-center align-items-center" >
+      <div class="row justify-content-center align-items-left" id="searchArea">
          <!-- Search bar row-->
-         <div class="justify-content-center align-items-center">
-            <form method="post" name="searchForm">
-               <input type="text" name="movie" id="movie" placeholder="leave blank to search for all movies" size="35"><br>
+         <div style="padding:50px">
+            <form method="post" name="searchForm" class="options">
+               <input type="text" name="movie" id="movie" >
+               <i class="fa fa-info-circle" data-toggle="tooltip" title="Leave blank to search for all movies!" style="font-size:24px"></i>
+               <br>
                <input type="checkbox" name="check" value="harkins" required> Harkins <br>
                <input type="checkbox" name="check" value="amc" required> AMC Theatres <br>
                <input type="submit" value="search" id="movieSearch" class="submitButton" style="margin-top: 10px; margin-bottom: 10px">
@@ -64,30 +67,41 @@
               {% for item in movies %}
                <div class="col-md-3">
 
-              <div class="card mb-3 box-shadow animated animatedFadeInUp fadeInUp" >
-                <img class="card-img-top"  alt="Thumbnail [100%x225]" style="height: 200px; width: 150px; display: block;" src="{{ movies[item][0] }} " data-holder-rendered="true">
+              <div class="card text-center mb-3 box-shadow animated animatedFadeInUp fadeInUp movieBox" >
+
+                <img class="card-img-top"  alt="Thumbnail [100%x225]" src="{{ movies[item][0] }} " data-holder-rendered="true">
+
                 <div class="card-body">
                   <h6 class="card-title">{{ movies[item][2] }}</h6>
                   <p class="card-text" id="movie-title">{{ item }}</p>
-                  <div class="d-flex justify-content-between align-items-center">
+
+                  <div class="d-flex justify-content-center align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fa fa-external-link"></i></button>
                     </div>
-                    <!--<small class="text-muted">9 mins</small>-->
                   </div>
+
                 </div>
               </div>
             </div>
             {% endfor %}
             </div>
          </div>
-
   </div>
-  <script type="text/javascript">
-    if({{ alert }} == true)
-      {
-        alert("Please select a movie theatre");
-      }
+  <script>
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+  $(function(){
+    var requiredCheckboxes = $('.options :checkbox[required]');
+    requiredCheckboxes.change(function(){
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        } else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+});
   </script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

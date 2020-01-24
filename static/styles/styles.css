@@ -4,20 +4,20 @@ body {
 }
 
 #title{
-	font-size:20px;
+	font-size:40px !important;
 
 	font-weight:bold;
 }
 
 @media only screen and (max-width: 768px) {
   #title {
-    font-size: 2px !important;
+    font-size: 25px !important;
   }
 }
 
 @media only screen and (max-width: 320px) {
   #title {
-    font-size: 15px !important;
+    font-size: 10px !important;
   }
 }
 
@@ -25,6 +25,16 @@ body {
 	margin-top: 80px;
 }
 
+#searchArea {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 #movie-results{
 	margin-top:80px;
 	padding:0 50px 50px 50px;
@@ -49,10 +59,14 @@ body {
 
 input[type='text'],input[type='number'],textarea {font-size:16px;}
 
+.fa-info-circle {
+    margin-left: 10px;
+}
+
 .submitButton {
     text-transform: uppercase;
     text-decoration: none;
-    padding:5px;
+    padding:10px;
     border-radius: 25px;
     background: #fcba03;
     display: inline-block;
@@ -63,12 +77,25 @@ input[type='text'],input[type='number'],textarea {font-size:16px;}
 .clearButton {
     text-transform: uppercase;
     text-decoration: none;
-    padding:5px;
+    padding:10px;
     border-radius: 25px;
     background: #fc1803;
     display: inline-block;
     border: none;
     transition: all 0.4s ease 0s;
+    margin-bottom: 20px;
+}
+
+.movieBox {
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+
+.card-img-top {
+  height: 200px;
+  width: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @keyframes fadeInUp {
