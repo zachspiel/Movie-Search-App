@@ -8,6 +8,7 @@
       <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src='https://kit.fontawesome.com/a076d05399.js'></script>
    </head>
    <body>
     <header>
@@ -77,7 +78,7 @@
 
                   <div class="d-flex justify-content-center align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fa fa-external-link"></i></button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fas fa-external-link-alt"></i></button>
                     </div>
                   </div>
 
@@ -87,6 +88,7 @@
             {% endfor %}
             </div>
          </div>
+         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class='fas fa-angle-up' style="color:white;"></i> <br> Top </button>
   </div>
   <script>
   $(document).ready(function(){
@@ -102,6 +104,25 @@
         }
     });
 });
+//Get the button:
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
   </script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
