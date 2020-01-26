@@ -6,6 +6,7 @@ from scraping import getInfo
 
 app = Flask(__name__)
 
+NO_MOVIES_FOUND = 0
 
 @app.route('/', methods = ["POST", "GET"])
 def index():
@@ -29,16 +30,22 @@ def search():
 		print(theatre)
 
 		if(len(theatre) == 0):
-			return render_template('search.html',clearButton="none",alert = True)
+			return render_template('search.html',clearButton="none")
 
 		info = getInfo(movie_name,theatre)
 
-		return render_template(
-			'search.html',
-			movies = info,
-			clearButton = 'visible',
-			className = 'py-5 bg-light',
+		if len(info) == NO_MOVIES_FOUND:
+			return render_template(
+				'search.html',
+				noResults = True,
+			)
+		else:
+			return render_template(
+				'search.html',
+				movies = info,
+				clearButton = 'visible',
+				className = 'py-5 bg-light',
 
-		)
+			)
 
 	return render_template('search.html',clearButton="none")
