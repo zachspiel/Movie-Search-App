@@ -1,10 +1,13 @@
-html, body, #map-canvas {
-       margin: 0;
-       padding: 0;
-       height: 100%;
-       width: 100%;
-   }
+html {
+  scroll-behavior: smooth;
+}
 
+html, body, #map-canvas {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
 
 body {
   font-family: 'Roboto', serif;
@@ -146,46 +149,42 @@ input[type='text'],input[type='number'],textarea {font-size:16px;}
 }
 
 #myBtn {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 20px; /* Place the button at the bottom of the page */
-  right: 30px; /* Place the button 30px from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #343a40; /* Set a background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #343a40;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
 }
 
 #myBtn:hover {
-  background-color: #555; /* Add a dark-grey background on hover */
+  background-color: #555;
 }
-/* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
-   #map {
-     height: 100%;
-     background-color: grey;
-   }
 
-   /* TODO: Step 4A1: Make a generic sidebar */
-     /* Styling for an info pane that slides out from the left.
-      * Hidden by default. */
-     #panel {
-       height: 100%;
-       background-color: white;
-       margin-top: 30px;
-       overflow-x: hidden;
-       transition: all .2s ease-out;
+#map {
+ height: 100%;
+ background-color: grey;
+}
 
-     }
+#panel {
+ height: 100%;
+ background-color: white;
+ margin-top: 30px;
+ overflow-x: hidden;
+ transition: all .2s ease-out;
 
-     .open {
-       width: 250px;
-     }
+}
+
+.open {
+ width: 250px;
+}
 
      /* Styling for place details */
      .hero {
