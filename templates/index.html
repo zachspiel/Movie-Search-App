@@ -8,70 +8,69 @@
       <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
    </head>
    <body>
-     <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">About</h4>
-              <p class="text-muted">MoviePhone helps by making your movie viewing experience as seamless as possible!</p>
+      <header>
+         <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-8 col-md-7 py-4">
+                     <h4 class="text-white">About</h4>
+                     <p class="text-muted">MoviePhone helps by making your movie viewing experience as seamless as possible!</p>
+                  </div>
+                  <div class="col-sm-4 offset-md-1 py-4">
+                     <h4 class="text-white">Contact</h4>
+                     <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Email me at: zachspielberger@gmail.com</a></li>
+                        <li><a href="#" class="text-white">View <a href="https://github.com/zachspiel" target="_blank">Github</a></li>
+                     </ul>
+                  </div>
+               </div>
             </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-white">Contact</h4>
-              <ul class="list-unstyled">
-                <li><a href="#" class="text-white">Email me at: zachspielberger@gmail.com</a></li>
-                <li><a href="#" class="text-white">View <a href="https://github.com/zachspiel" target="_blank">Github</a></li>
-              </ul>
+         </div>
+         <div class="navbar navbar-dark bg-dark box-shadow">
+            <div class="container d-flex justify-content-between">
+               <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                     <circle cx="12" cy="13" r="4"></circle>
+                  </svg>
+                  <strong class="logo">MoviePhone</strong>
+               </a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark box-shadow">
-        <div class="container d-flex justify-content-between">
-          <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong class="logo">MoviePhone</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <main>
-       <section class="jumbotron text-center" style="background-color: #fff;">
-        <div class="container">
-          <h1 class="jumbotron-heading">MoviePhone</h1>
-          <p class="lead text-muted">MoviePhone retrieves all of the latest movies and showtimes as soon as they are added to Harkins and AMC so you can find all showtimes in one place. Future updates will include other movie chains.</p>
-          <p>
-            <a href="{{ url_for('search') }}" class="btn btn-primary my-2">Search for movies now</a>
-          </p>
-        </div>
-      </section>
-    </main>
-
-    <div class="container-fluid">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-md-4 col-sm-12">
-          <h1 id="nearbyTheaters">Movie theaters near you</h1>
-          <div id="panel"></div>
-        </div>
-        <div class="col-md-8 col-sm-12">
-          <div style="height:600px; width:100%;">
-             <div id="map-canvas">
-               <div id="map"></div>
-             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Google Maps JS initialization-->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" async defer></script>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAlvLs2DDai1h1LlAMmjnZGJsHDQRMb3U&libraries=places&callback=initMap">
-</script>
+         </div>
+      </header>
+      <main>
+         <section class="jumbotron text-center" style="background-color: #fff;">
+            <div class="container">
+               <h1 class="jumbotron-heading">MoviePhone</h1>
+               <p class="lead text-muted">MoviePhone retrieves all of the latest movies and showtimes as soon as they are added to Harkins and AMC so you can find all showtimes in one place. Future updates will include other movie chains.</p>
+               <p>
+                  <a href="{{ url_for('search') }}" class="btn btn-primary my-2">Search for movies now</a>
+               </p>
+            </div>
+         </section>
+      </main>
+      <!--
+      <div class="container-fluid">
+         <div class="row justify-content-center align-items-center">
+            <div class="col-md-4 col-sm-12">
+               <h1 id="nearbyTheaters">Movie theaters near you</h1>
+               <div id="panel"></div>
+            </div>
+            <div class="col-md-8 col-sm-12">
+               <div style="height:600px; width:100%;">
+                  <div id="map-canvas">
+                     <div id="map"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>-->
+      <!-- Google Maps JS initialization-->
+      <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" async defer></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAlvLs2DDai1h1LlAMmjnZGJsHDQRMb3U&libraries=places&callback=initMap"></script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
