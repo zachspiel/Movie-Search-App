@@ -2,7 +2,7 @@
 from flask import Flask, jsonify, render_template, request, Response, redirect, url_for
 import json
 from scraping import getInfo
-# from scraping import topBoxOffice
+from scraping import getLatestReleases
 
 app = Flask(__name__)
 
@@ -10,13 +10,14 @@ NO_MOVIES_FOUND = 0
 
 @app.route('/', methods = ["POST", "GET"])
 def index():
+	latestMovies = getLatestReleases()
 
-	# info = topBoxOffice()
+	searchResults = getInfo("","harkins,amc")
 
-	# Render blank template
-	#return render_template('index.html',
-		#boxOffice = info,clearButton="none")
-	return render_template('index.html')
+	print(set(latestMovies) and set(searchResults))
+
+	return render_template('index.html', movies = latestMovies)
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
 
