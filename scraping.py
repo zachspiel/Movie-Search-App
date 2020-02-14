@@ -92,5 +92,32 @@ def scrapeNowShowing(movieName, baseUrl,searchUrl, container, containerClass, im
 
 	return moviesFound
 
+def getLatestReleases():
+	base_url = "https://www.fandango.com/movies-in-theaters"
+	request = requests.get(base_url)
+	soup = BeautifulSoup(request.text, "html.parser")
+
+	movies = soup.find_all('li', class_="poster-card")
+
+	movieList = {}
+
+	index = 0
+
+	for item in movies:
+		movieTitle = item.find("span", {"class":"heading-style-1"})
+		movieTitle = movieTitle.text.replace('\n', "").strip()
+
+		movieImage = item.find("img", {"class":"poster-card--img"})
+		movieImage = movieImage["src"]
+
+		movieUrl = item.find("a").get("href")
+		movieUrl = "https://www.fandango.com/" + movieUrl
+		
+		if(index < 8):
+			movieList[movieTitle] = [movieTitle,movieImage,movieUrl]
+			index += 1
+
+	return movieList
+
 if __name__ == "__main__":
 	print(scrape())

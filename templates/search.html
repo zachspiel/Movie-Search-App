@@ -10,6 +10,15 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158123000-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-158123000-1');
+      </script>
    </head>
    <body>
       <header>
@@ -32,13 +41,10 @@
          </div>
          <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
-               <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                     <circle cx="12" cy="13" r="4"></circle>
-                  </svg>
-                  <strong class="logo">MoviePhone</strong>
-               </a>
+              <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
+                <img src="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"/>
+                 <strong class="logo" tyle="margin-left:5px;">MoviePhone</strong>
+              </a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -87,7 +93,7 @@
                         <p class="card-text" id="movie-title">{{ item }}</p>
                         <div class="d-flex justify-content-center align-items-center">
                            <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fas fa-external-link-alt"></i></button>
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="right"></i></button>
                            </div>
                         </div>
                      </div>
@@ -138,9 +144,15 @@
             document.documentElement.scrollTop = 0;
           }
 
+<<<<<<< HEAD
           $( function() {
             $( document ).tooltip();
           } );
+=======
+          $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+>>>>>>> 6dda2bc49da777ef7d33badc678f77621a992baf
       </script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
