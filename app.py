@@ -14,7 +14,6 @@ def index():
 
 	searchResults = getInfo("","harkins,amc")
 
-	print(set(latestMovies) and set(searchResults))
 
 	return render_template('index.html', movies = latestMovies)
 
