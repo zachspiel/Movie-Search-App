@@ -27,7 +27,6 @@ def search():
 		movie_name = posts['movie'].title()
 
 		theatre = request.form.getlist('check')
-		print(theatre)
 
 		if(len(theatre) == 0):
 			return render_template('search.html',clearButton="none")
