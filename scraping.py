@@ -28,13 +28,14 @@ def getInfo(movieName,theatre):
 		movie_link = item.find("a").get('href')
 		movie_link = "http://harkins.com" + movie_link
 
+		scrapeDetails(movie_link, "harkins")
+
 		if movieName not in movie_name:
 			continue
 		else:
 			if 'harkins' in theatre:
 				movies[movie_name] = [movie_poster,movie_link, "Harkins"]
-			#movieLink = movie_name + "_link"
-			#movies[movie_name + "_link"] = movie_link
+
 
 	for movie in amc_movies:
 		poster = movie.find("img", {"class":None})
@@ -46,6 +47,8 @@ def getInfo(movieName,theatre):
 		link = movie.find("a").get("href")
 		link = "http://amctheatres.com" + link
 
+		scrapeDetails(link, "amc")
+
 		if movieName not in name:
 			continue
 		else:
@@ -53,6 +56,20 @@ def getInfo(movieName,theatre):
 				movies[name] = [poster,link,"AMC Theatres"]
 
 	return movies
+
+def scrapeDetails(link, theatre):
+	request = requests.get(link)
+
+	soup = BeautifulSoup(request.text, "html.parser")
+	time = ""
+
+	if theatre == "amc":
+		time = soup.find("span", itemprop="duration")
+	else:
+		time = soup.find("time", datetime="")
+		time = time.get_text()
+
+	return time
 
 def getLatestReleases():
 	base_url = "https://www.fandango.com/movies-in-theaters"
@@ -74,7 +91,7 @@ def getLatestReleases():
 
 		movieUrl = item.find("a").get("href")
 		movieUrl = "https://www.fandango.com/" + movieUrl
-		
+
 		if(index < 8):
 			movieList[movieTitle] = [movieTitle,movieImage,movieUrl]
 			index += 1

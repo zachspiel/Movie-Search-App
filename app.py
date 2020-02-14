@@ -13,10 +13,8 @@ def index():
 	latestMovies = getLatestReleases()
 
 	searchResults = getInfo("","harkins,amc")
-
-	print(set(latestMovies) and set(searchResults))
-
-	return render_template('index.html', movies = latestMovies)
+	#, movies = latestMovies
+	return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
