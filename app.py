@@ -13,9 +13,14 @@ def index():
 	latestMovies = getLatestReleases()
 
 	searchResults = getInfo("","harkins,amc")
+<<<<<<< HEAD
+	#, movies = latestMovies
+	return render_template('index.html')
+=======
 
 
 	return render_template('index.html', movies = latestMovies)
+>>>>>>> af77033bf529937ebfc99f120c1f4349457c82be
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
