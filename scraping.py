@@ -39,11 +39,8 @@ def getInfo(movieName,theatre):
 		movie_link = item.find("a").get('href')
 		movie_link = "http://harkins.com" + movie_link
 
-<<<<<<< HEAD
 		scrapeDetails(movie_link, "harkins")
-=======
->>>>>>> af77033bf529937ebfc99f120c1f4349457c82be
-
+		
 		if movieName not in movie_name:
 			continue
 		else:
@@ -61,10 +58,7 @@ def getInfo(movieName,theatre):
 		link = movie.find("a").get("href")
 		link = "http://amctheatres.com" + link
 
-<<<<<<< HEAD
 		scrapeDetails(link, "amc")
-=======
->>>>>>> af77033bf529937ebfc99f120c1f4349457c82be
 
 		if movieName not in name:
 			continue
