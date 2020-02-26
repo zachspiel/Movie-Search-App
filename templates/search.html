@@ -39,7 +39,7 @@
                </div>
             </div>
          </div>
-         <div class="navbar navbar-dark bg-dark box-shadow">
+         <div class="navbar fixed-top navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
               <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
                 <img src="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"/>
@@ -144,13 +144,9 @@
             document.documentElement.scrollTop = 0;
           }
 
-
-          $( function() {
-            $( document ).tooltip();
-          } );
-
-          $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();
+          $(document).on('mouseenter', ".fa-info-circle", function () {
+              var $this = $(this);
+              $this.tooltip('show');
           });
 
       </script>
