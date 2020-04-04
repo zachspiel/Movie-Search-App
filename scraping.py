@@ -2,57 +2,58 @@ from bs4 import BeautifulSoup
 import requests
 
 # ****** FUNCTION TO GET MOVIE POSTER IMAGES ***** #
+
 def getInfo(movieName,theatre):
+	moviesFound = {}
 
-	now_showing_url = 'https://www.harkins.com/movies/now-showing'
-	now_showing_amc = 'https://www.amctheatres.com/movies'
+	if(theatre[0] == "harkins"):
+		moviesFound =  scrapeNowShowing(movieName, "https://www.harkins.com", "https://www.harkins.com/movies/now-showing", "li", "posters-container", "block-image", "h2", "Harkins")
+	elif( theatre[0] == "amc"):
+		moviesFound = scrapeNowShowing(movieName, "https://www.amctheatres.com", "https://www.amctheatres.com/movies", "div", "Slide", None, "h3", "AMC Theatres")
+	elif(theatre[0] == "harkins" and theatre[1] == "amc"):
+		moviesFound = scrapeNowShowing(movieName, "https://www.harkins.com", "https://www.harkins.com/movies/now-showing", "li", "posters-container", "block-image", "h2", "Harkins")
 
-	r = requests.get(now_showing_url)
-	amcR = requests.get(now_showing_amc)
+	return moviesFound
 
-	soup = BeautifulSoup(r.text, "html.parser")
-	amcSoup = BeautifulSoup(amcR.text, "html.parser")
 
-	all_movies = soup.find_all('li', class_="posters-container") # find all movies now playing
-	amc_movies = amcSoup.find_all('div', class_="Slide")
+def scrapeNowShowing(movieName, baseUrl,searchUrl, container, containerClass, imgClass, heading, theatre):
+	request = requests.get(searchUrl)
+	htmlParser = BeautifulSoup(request.text, "html.parser")
 
-	movies = {}
+	movieContainers = htmlParser.find_all(container, class_=containerClass)
 
-	for item in all_movies:
-		movie_poster = item.find("img", {"class": "block-image"})
+	moviesFound = {}
+
+	for container in movieContainers:
+		movie_poster = container.find("img", {"class": imgClass})
 		movie_poster = movie_poster['src']
 
-		movie_name = item.find("h2", {"class":None})
+		movie_name = container.find(heading, {"class":None})
 		movie_name = movie_name.text.replace('\n', "").strip()
 
-		movie_link = item.find("a").get('href')
-		movie_link = "http://harkins.com" + movie_link
+		movie_link = container.find("a").get('href')
+		movie_link = baseUrl + movie_link
 
 		if movieName not in movie_name:
 			continue
 		else:
-			if 'harkins' in theatre:
-				movies[movie_name] = [movie_poster,movie_link, "Harkins"]
-			#movieLink = movie_name + "_link"
-			#movies[movie_name + "_link"] = movie_link
+			moviesFound[movie_name] = [movie_poster,movie_link, theatre]
 
-	for movie in amc_movies:
-		poster = movie.find("img", {"class":None})
-		poster = poster['src']
+	return moviesFound
 
-		name = movie.find("h3", {"class":None})
-		name = name.text.replace('\n', "").strip()
+def scrapeDetails(link, theatre):
+	request = requests.get(link)
 
-		link = movie.find("a").get("href")
-		link = "http://amctheatres.com" + link
+	soup = BeautifulSoup(request.text, "html.parser")
+	time = ""
 
-		if movieName not in name:
-			continue
-		else:
-			if 'amc' in theatre:
-				movies[name] = [poster,link,"AMC Theatres"]
+	if theatre == "amc":
+		time = soup.find("span", itemprop="duration")
+	else:
+		time = soup.find("time", datetime="")
+		time = time.get_text()
 
-	return movies
+	return time
 
 if __name__ == "__main__":
 	print(scrape())

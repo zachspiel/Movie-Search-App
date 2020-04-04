@@ -2,21 +2,13 @@
 from flask import Flask, jsonify, render_template, request, Response, redirect, url_for
 import json
 from scraping import getInfo
-# from scraping import topBoxOffice
 
 app = Flask(__name__)
 
-NO_MOVIES_FOUND = 0
-
 @app.route('/', methods = ["POST", "GET"])
 def index():
-
-	# info = topBoxOffice()
-
-	# Render blank template
-	#return render_template('index.html',
-		#boxOffice = info,clearButton="none")
 	return render_template('index.html')
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
 
@@ -27,14 +19,13 @@ def search():
 		movie_name = posts['movie'].title()
 
 		theatre = request.form.getlist('check')
-		print(theatre)
 
 		if(len(theatre) == 0):
 			return render_template('search.html',clearButton="none")
 
 		info = getInfo(movie_name,theatre)
 
-		if len(info) == NO_MOVIES_FOUND:
+		if len(info) == 0:
 			return render_template(
 				'search.html',
 				noResults = True,
