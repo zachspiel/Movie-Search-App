@@ -5,7 +5,7 @@ Search for nearby movies now showing at Harkins and AMC theatres.
 
 ## Getting started
 - Install dependencies
-```shell
+```shells
 pip install -r requirements.txt
 ```
 - Run application
