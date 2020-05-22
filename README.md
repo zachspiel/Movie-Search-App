@@ -1,11 +1,11 @@
 # Movie search app :clapper:
 Search for nearby movies now showing at Harkins and AMC theatres.
-
+aasd
 <img src="https://raw.githubusercontent.com/zachspiel/Movie-Search-App/master/static/ApplicationDemo.png">
 
 ## Getting started
 - Install dependencies
-```shell
+```shells
 pip install -r requirements.txt
 ```
 - Run application
