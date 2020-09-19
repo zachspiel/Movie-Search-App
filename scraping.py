@@ -1,59 +1,94 @@
 from bs4 import BeautifulSoup
+from fuzzywuzzy import fuzz
 import requests
 
-# ****** FUNCTION TO GET MOVIE POSTER IMAGES ***** #
 
-def getInfo(movieName,theatre):
-	moviesFound = {}
+class MovieTheater(object):
 
-	if(theatre[0] == "harkins"):
-		moviesFound =  scrapeNowShowing(movieName, "https://www.harkins.com", "https://www.harkins.com/movies/now-showing", "li", "posters-container", "block-image", "h2", "Harkins")
-	elif( theatre[0] == "amc"):
-		moviesFound = scrapeNowShowing(movieName, "https://www.amctheatres.com", "https://www.amctheatres.com/movies", "div", "Slide", None, "h3", "AMC Theatres")
-	elif(theatre[0] == "harkins" and theatre[1] == "amc"):
-		moviesFound = scrapeNowShowing(movieName, "https://www.harkins.com", "https://www.harkins.com/movies/now-showing", "li", "posters-container", "block-image", "h2", "Harkins")
+    def __init__(self, baseUrl, movieListUrl, movieContainer, movieContainerClass, moviePosterClass, movieTitleElement):
+        self.baseUrl = baseUrl
+        self.movieListUrl = movieListUrl
+        self.movieContainer = movieContainer
+        self.movieContainerClass = movieContainerClass
+        self.moviePosterClass = moviePosterClass
+        self.movieTitleElement = movieTitleElement
 
-	return moviesFound
+    def getWebsiteHtml(self, websiteUrl=None):
+        if websiteUrl is None:
+            websiteUrl = self.movieListUrl
+
+        request = requests.get(websiteUrl)
+        websiteHtml = BeautifulSoup(request.text, "html.parser")
+
+        return websiteHtml
 
 
-def scrapeNowShowing(movieName, baseUrl,searchUrl, container, containerClass, imgClass, heading, theatre):
-	request = requests.get(searchUrl)
-	htmlParser = BeautifulSoup(request.text, "html.parser")
+class Harkins(MovieTheater):
 
-	movieContainers = htmlParser.find_all(container, class_=containerClass)
+    def getTheaterName(self):
+        return "Harkins"
 
-	moviesFound = {}
 
-	for container in movieContainers:
-		movie_poster = container.find("img", {"class": imgClass})
-		movie_poster = movie_poster['src']
+class Amc(MovieTheater):
 
-		movie_name = container.find(heading, {"class":None})
-		movie_name = movie_name.text.replace('\n', "").strip()
+    def getTheaterName(self):
+        return "AMC"
 
-		movie_link = container.find("a").get('href')
-		movie_link = baseUrl + movie_link
 
-		if movieName not in movie_name:
-			continue
-		else:
-			moviesFound[movie_name] = [movie_poster,movie_link, theatre]
+def getInfo(movieName, theatre):
+    moviesFound = {}
 
-	return moviesFound
+    harkins = Harkins("https://www.harkins.com", "https://www.harkins.com/movies/now-showing",
+                      "li", "posters-container", "block-image", "h2")
+    amc = Amc("https://www.amctheatres.com",
+              "https://www.amctheatres.com/movies", "div", "Slide", None, "h3")
 
-def scrapeDetails(link, theatre):
-	request = requests.get(link)
+    if(theatre == "HARKINS"):
+        moviesFound = scrapeNowShowing(harkins, movieName)
 
-	soup = BeautifulSoup(request.text, "html.parser")
-	time = ""
+    elif(theatre == "AMC"):
+        moviesFound = scrapeNowShowing(amc, movieName)
 
-	if theatre == "amc":
-		time = soup.find("span", itemprop="duration")
-	else:
-		time = soup.find("time", datetime="")
-		time = time.get_text()
+    elif(theatre == "H_AMC"):
+        harkinsMovies = scrapeNowShowing(harkins, movieName)
+        amcMovies = scrapeNowShowing(amc, movieName)
 
-	return time
+        moviesFound = Merge(harkinsMovies, amcMovies)
 
-if __name__ == "__main__":
-	print(scrape())
+    return moviesFound
+
+
+def scrapeNowShowing(movieTheaterClass, movieInput):
+    html = movieTheaterClass.getWebsiteHtml()
+
+    movieContainer = movieTheaterClass.movieContainer
+    movieContainerClass = movieTheaterClass.movieContainerClass
+
+    allMovies = html.find_all(movieContainer, class_=movieContainerClass)
+
+    matchingMoviesFound = {}
+
+    for container in allMovies:
+        movie_poster = container.find(
+            "img", {"class": movieTheaterClass.moviePosterClass})
+        movie_poster = movie_poster['src']
+
+        movie_name = container.find(
+            movieTheaterClass.movieTitleElement, {"class": None})
+        movie_name = movie_name.text.replace('\n', "").strip()
+
+        movie_link = container.find("a").get('href')
+        movie_link = movieTheaterClass.baseUrl + movie_link
+
+        ratio = fuzz.ratio(movieInput, movie_name.lower())
+
+        if ratio > 70 or movieInput == '' or movieInput in movie_name:
+            matchingMoviesFound[movie_name] = [movie_poster,
+                                               movie_link, movieTheaterClass.getTheaterName()]
+
+    return matchingMoviesFound
+
+
+def Merge(dict1, dict2):
+    combinedDictionary = {**dict1, **dict2}
+    return combinedDictionary

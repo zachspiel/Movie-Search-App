@@ -1,157 +1,243 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>MoviePhone</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
-      <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158123000-1"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-158123000-1');
-      </script>
-   </head>
-   <body>
-      <header>
-         <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-               <div class="row">
-                  <div class="col-sm-8 col-md-7 py-4">
-                     <h4 class="text-white">About</h4>
-                     <p class="text-muted">MoviePhone helps by making your movie viewing experience as seamless as possible!</p>
-                  </div>
-                  <div class="col-sm-4 offset-md-1 py-4">
-                     <h4 class="text-white">Contact</h4>
-                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Email me at: zachspielberger@gmail.com</a></li>
-                        <li><a href="#" class="text-white">View <a href="https://github.com/zachspiel" target="_blank">Github</a></li>
-                     </ul>
-                  </div>
-               </div>
+  <head>
+    <title>MoviePhone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/bootstrap.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles/styles.css') }}"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158123000-1"></script>
+  </head>
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">About</h4>
+              <p class="text-muted">
+                MoviePhone helps by making your movie viewing experience as seamless as possible!
+              </p>
             </div>
-         </div>
-         <div class="navbar fixed-top navbar-dark bg-dark box-shadow">
-            <div class="container d-flex justify-content-between">
-              <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
-                <img src="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}"/>
-                 <strong class="logo" tyle="margin-left:5px;">MoviePhone</strong>
-              </a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"></span>
-               </button>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Contact</h4>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#" class="text-white">Email me at: zachspielberger@gmail.com</a>
+                </li>
+                <li>
+                  <a href="#" class="text-white"
+                    >View <a href="https://github.com/zachspiel" target="_blank">Github</a></a
+                  >
+                </li>
+              </ul>
             </div>
-         </div>
-      </header>
-      <div class="container-fluid" >
+          </div>
+        </div>
+      </div>
+      <div class="navbar fixed-top navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="{{ url_for('index' )}}" class="navbar-brand d-flex align-items-center">
+            <img src="{{ url_for('static', filename='favicon_io/favicon-32x32.png') }}" />
+            <strong class="logo" tyle="margin-left:5px;">MoviePhone</strong>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div class="container-fluid">
       <div class="row justify-content-center align-items-center">
-         <div class="row-sm-12">
-            <h3 id="title">Search for a movie below</h3>
-         </div>
+        <div class="row-sm-12">
+          <h3 id="title">Search for a movie below</h3>
+        </div>
       </div>
       <div class="row justify-content-center align-items-left" id="searchArea">
-         <!-- Search bar row-->
-         <div style="padding:50px">
-            <form method="post" name="searchForm" id="searchForm" class="options">
-               <input type="text" name="movie" id="movie" >
-               <i class="fa fa-info-circle" data-toggle="tooltip" title="Leave blank to search for all movies!" style="font-size:24px"></i>
-               <br>
-               <input type="checkbox" name="check" value="harkins"> Harkins <br>
-               <input type="checkbox" name="check" value="amc"> AMC Theatres <br>
-               <input type="submit" value="search" id="movieSearch" class="submitButton" style="margin-top: 10px; margin-bottom: 10px">
-            </form>
-            <button type="button" onclick="window.location.href='{{ url_for( 'search' ) }}';" style="display:{{ clearButton }}" class="clearButton">Clear Search Results</button>
-         </div>
-      </div>
-      {% block content %}
-      {% if noResults %}
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12">
-               <h1>Sorry, no results found.</h1>
+        <div style="padding: 50px;">
+          <form method="post" name="searchForm" id="searchForm" class="options">
+            <div class="alert alert-danger error-message" role="alert">
+              Please select a theater
             </div>
-         </div>
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="movie"
+                >Enter a movie below or leave blank to see all movies</label
+              >
+              <br />
+              <input
+                class="form-control"
+                type="text"
+                name="movie"
+                id="movie"
+                placeholder="Movie title"
+              />
+            </div>
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Select theater(s)</label>
+              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="theater_list">
+                <option selected>Select</option>
+                <option value="HARKINS">Harkins</option>
+                <option value="AMC">AMC</option>
+                <option value="H_AMC">Harkins & AMC</option>
+              </select>
+
+              <input
+                type="submit"
+                value="search for all movies"
+                id="movieSearch"
+                class="submitButton btn-primary"
+                style="margin-top: 10px; margin-bottom: 10px;"
+              />
+              <button
+                type="button"
+                onclick="window.location.href='{{ url_for( 'search' ) }}'"
+                style="display:{{ clearButton }}"
+                class="clearButton btn-danger"
+              >
+                clear search results
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% block content %} {% if noResults %}
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Sorry, no results found.</h1>
+          </div>
+        </div>
       </div>
       {% else %}
       <div class="{{ className }}">
-         <div class="container">
-            <div class="row">
-               {% for item in movies %}
-               <div class="col-md-3">
-                  <div class="card text-center mb-3 box-shadow animated animatedFadeInUp fadeInUp movieBox" >
-                     <img class="card-img-top"  alt="Thumbnail [100%x225]" src="{{ movies[item][0] }} " data-holder-rendered="true">
-                     <div class="card-body">
-                        <h6 class="card-title">{{ movies[item][2] }}</h6>
-                        <p class="card-text" id="movie-title">{{ item }}</p>
-                        <div class="d-flex justify-content-center align-items-center">
-                           <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.open('{{ movies[item][1] }}','_blank')">View <i class="fas fa-external-link-alt" data-toggle="tooltip" data-placement="right"></i></button>
-                           </div>
-                        </div>
-                     </div>
+        <div class="container">
+          <div class="row">
+            {% for item in movies %}
+            <div class="col-md-3">
+              <div
+                class="card text-center mb-3 box-shadow animated animatedFadeInUp fadeInUp movieBox"
+              >
+                <img
+                  class="card-img-top"
+                  alt="{{ item }}"
+                  src="{{ movies[item][0] }} "
+                  data-holder-rendered="true"
+                />
+                <div class="card-body">
+                  <h6 class="card-title">{{ movies[item][2] }}</h6>
+                  <p class="card-text" id="movie-title">{{ item }}</p>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                        onclick="window.open('{{ movies[item][1] }}','_blank')"
+                      >
+                        View on theater website
+                        <i
+                          class="fas fa-external-link-alt"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                        ></i>
+                      </button>
+                    </div>
                   </div>
-               </div>
-               {% endfor %}
+                </div>
+              </div>
             </div>
-         </div>
-         {% endif %}
-         {% endblock content %}
-         <!-- The Modal -->
-         <div id="myModal" class="modal">
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %} {% endblock content %}
 
-           <!-- Modal content -->
-           <div class="modal-content">
-             <span class="close">&times;</span>
-             <p>Some text in the Modal..</p>
-           </div>
-         </div>
-         <button onclick="topFunction()" id="myBtn" title="Go to top"><i class='fas fa-angle-up' style="color:white;"></i> <br> Top </button>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">
+          <i class="fas fa-angle-up" style="color: white;"></i> <br />
+          Top
+        </button>
       </div>
-      <script>
-         $("#searchForm").submit(function(){
-             var checked = $("#searchForm input:checked").length > 0;
-             if (!checked){
-                 alert("Please check at least one checkbox");
-                 return false;
-             }
-         })
+    </div>
 
-         //Get the button
-          var mybutton = document.getElementById("myBtn");
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
 
-          // When the user scrolls down 20px from the top of the document, show the button
-          window.onscroll = function() {scrollFunction()};
+    <script>
+      $('#searchForm').submit(function (event) {
+        const selectedTheater = $('#inlineFormCustomSelect').val();
 
-          function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-              mybutton.style.display = "block";
-            } else {
-              mybutton.style.display = "none";
-            }
-          }
+        if (selectedTheater === 'Select') {
+          event.preventDefault();
+          $('.error-message').css('display', 'block');
+        }
+      });
 
-          // When the user clicks on the button, scroll to the top of the document
-          function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-          }
+      const mybutton = document.getElementById('myBtn');
 
-          $(document).on('mouseenter', ".fa-info-circle", function () {
-              var $this = $(this);
-              $this.tooltip('show');
-          });
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function () {
+        scrollFunction();
+      };
 
-      </script>
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   </body>
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          mybutton.style.display = 'block';
+        } else {
+          mybutton.style.display = 'none';
+        }
+      }
+
+      // scroll to the top of the document
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+
+      $(document).on('mouseenter', '.fa-info-circle', function () {
+        const $this = $(this);
+        $this.tooltip('show');
+      });
+
+      $('input').keydown(function () {
+        $('#movieSearch').attr('value', 'search');
+      });
+    </script>
+  </body>
 </html>

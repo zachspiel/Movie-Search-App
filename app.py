@@ -1,42 +1,39 @@
-# app.py
-from flask import Flask, jsonify, render_template, request, Response, redirect, url_for
-import json
+from flask import Flask, render_template, request, Response, redirect, url_for
 from scraping import getInfo
 
 app = Flask(__name__)
 
-@app.route('/', methods = ["POST", "GET"])
+@app.route('/', methods=["POST", "GET"])
 def index():
-	return render_template('index.html')
+    return render_template('index.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
 
+
 @app.route('/search', methods=["POST", "GET"])
 def search():
-	if request.method == 'POST':
-		posts = request.form
-		movie_name = posts['movie'].title()
+    if request.method == 'POST':
+        posts = request.form
+        movie_name = posts['movie'].title()
 
-		theatre = request.form.getlist('check')
+        theaters = request.form.get('theater_list')
 
-		if(len(theatre) == 0):
-			return render_template('search.html',clearButton="none")
+        searchResults = getInfo(movie_name, theaters)
 
-		info = getInfo(movie_name,theatre)
+        if len(searchResults) == 0:
+            return render_template(
+                'search.html',
+                noResults=True,
+            )
+        else:
+            return render_template(
+                'search.html',
+                movies=searchResults,
+                clearButton='visible',
+                className='py-5 bg-light',
 
-		if len(info) == 0:
-			return render_template(
-				'search.html',
-				noResults = True,
-			)
-		else:
-			return render_template(
-				'search.html',
-				movies = info,
-				clearButton = 'visible',
-				className = 'py-5 bg-light',
+            )
 
-			)
-
-	return render_template('search.html',clearButton="none")
+    return render_template('search.html', clearButton="none")
