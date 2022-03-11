@@ -1,4 +1,4 @@
-# Movie search app :clapper:
+## Movie search app :clapper:
 
 Search for specific movies now showing at Harkins and AMC or view all now showing.
 
